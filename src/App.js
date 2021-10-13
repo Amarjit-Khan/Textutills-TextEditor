@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Textarea from "./components/Textarea";
+import { useState } from "react";
+import Alert from "./components/Alert";
+import About from "./components/About";
 
-function App() {
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+function App(props) {
+  const [mode, setMode] = useState("light");
+
+  const togglemode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.backgroundColor = "#110c30";
+      showalert("Dark mode has been enabled", "success");
+      document.title = "Textutills-Dark";
+      setInterval(() => {
+        document.title = "Install textutills now";
+      }, 2000);
+      setInterval(() => {
+        document.title = "Textutills is very helpfull";
+      }, 1500);
+    } else {
+      setMode("light");
+      document.body.style.backgroundColor = "white";
+      showalert("Dark mode has been disabled", "warning");
+      document.title = "Textutills-Home";
+    }
+  };
+
+  const [alert, setAlert] = useState(null);
+  const showalert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar title="Textutills" nav1="Home" nav2="About" mode={mode} togglemode1={togglemode}/>
+
+        <Alert alert={alert} />
+
+        <Switch>
+          <Route path="/about">
+            <About mode={mode} />
+          </Route>
+          <Route path="/">
+            <Textarea mode={mode} showalert={showalert} />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
 export default App;
+
+// #081a5c
