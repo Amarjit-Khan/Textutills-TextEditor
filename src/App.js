@@ -6,7 +6,7 @@ import Alert from "./components/Alert";
 import About from "./components/About";
 
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App(props) {
   const [mode, setMode] = useState("light");
@@ -63,5 +63,3 @@ function App(props) {
 }
 
 export default App;
-
-// #081a5c

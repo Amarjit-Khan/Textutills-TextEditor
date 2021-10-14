@@ -20,13 +20,11 @@ export default function Textarea(props) {
   };
 
   const handlecpyclck = () => {
-    var text2 = document.getElementById("mybox");
-    text2.select();
-    navigator.clipboard.writeText(text2.value);
+    navigator.clipboard.writeText(text)
     props.showalert("Text copied to clipboard", "primary");
   };
 
-  const [text, setText] = useState("Enter text here");
+  const [text, setText] = useState("");
 
   const handleonchng = (event) => {
     console.log("Change has been made");
@@ -78,26 +76,29 @@ export default function Textarea(props) {
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-1" onClick={handleupclck}>
+        <button disabled={text.length===0} className="btn btn-primary mx-1 my-1" onClick={handleupclck}>
           Convert to Upper Case
         </button>
         <button
+          disabled={text.length===0}
           type="button"
-          className="btn btn-secondary mx-1"
+          className="btn btn-secondary mx-1 my-1"
           onClick={handledwnclck}
         >
           Convert to Lower Case
         </button>
         <button
+         disabled={text.length===0}
           type="button"
-          className="btn btn-success mx-1"
+          className="btn btn-success mx-1 my-1"
           onClick={handlecpyclck}
         >
           Copy Text
         </button>
         <button
+         disabled={text.length===0}
           type="button"
-          className="btn btn-danger mx-1"
+          className="btn btn-danger mx-1 my-1"
           onClick={handleclrclck}
         >
           Clear Text
@@ -109,9 +110,9 @@ export default function Textarea(props) {
       >
         <h2>Text Summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters
         </p>
-        <p>Read in {text.split(" ").length * 0.008} mins</p>
+        <p>Read in {text.split(" ").filter((element)=>{return element.length!==0}).length * 0.008} mins</p>
       </div>
       <div
         className="container"
