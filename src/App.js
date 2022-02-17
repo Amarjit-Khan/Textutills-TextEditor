@@ -9,6 +9,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App(props) {
+// const App = (props) => {
   const [mode, setMode] = useState("light");
 
   const togglemode = () => {
@@ -45,7 +46,13 @@ function App(props) {
   return (
     <>
       <Router>
-        <Navbar title="Textutills" nav1="Home" nav2="About" mode={mode} togglemode1={togglemode}/>
+        <Navbar
+          title="Textutills"
+          nav1="Home"
+          nav2="About"
+          mode={mode}
+          togglemode1={togglemode}
+        />
 
         <Alert alert={alert} />
 
@@ -60,6 +67,6 @@ function App(props) {
       </Router>
     </>
   );
-}
+};
 
 export default App;
